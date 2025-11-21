@@ -7,6 +7,7 @@ import { ResultDisplay } from "@/components/ResultDisplay";
 import { ModeToggle } from "@/components/ModeToggle";
 import { WalletConnect } from "@/components/WalletConnect";
 import { FarcasterShare } from "@/components/FarcasterShare";
+import { SaveToLeaderboard } from "@/components/SaveToLeaderboard";
 import { useGame } from "@/hooks/useGame";
 import { Trophy } from "lucide-react";
 import Link from "next/link";
@@ -100,6 +101,13 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* Save to Leaderboard Button */}
+        {totalScore > 0 && (
+          <div className="mt-8 text-center">
+            <SaveToLeaderboard score={totalScore} disabled={isSpinning} />
+          </div>
+        )}
 
         {/* Leaderboard Link moderne */}
         <div className="mt-8 text-center">

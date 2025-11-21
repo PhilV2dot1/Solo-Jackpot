@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface JackpotMachineProps {
   isSpinning: boolean;
@@ -9,16 +10,73 @@ interface JackpotMachineProps {
   onSpinComplete?: () => void;
 }
 
-// Symboles crypto avec valeurs
+// Symboles crypto avec valeurs basées sur Market Cap (Nov 2025)
+// Logos depuis CoinGecko API
 const CRYPTO_SYMBOLS = [
-  { symbol: "₿", name: "BTC", value: 10, color: "#F7931A" },
-  { symbol: "Ξ", name: "ETH", value: 25, color: "#627EEA" },
-  { symbol: "◎", name: "SOL", value: 50, color: "#14F195" },
-  { symbol: "⬡", name: "CELO", value: 100, color: "#FBCC5C" },
-  { symbol: "◆", name: "BASE", value: 250, color: "#0052FF" },
-  { symbol: "✕", name: "XRP", value: 500, color: "#23292F" },
-  { symbol: "▲", name: "BNB", value: 1000, color: "#F3BA2F" },
-  { symbol: "⊗", name: "MISS", value: 0, color: "#EF4444" },
+  {
+    id: "bitcoin",
+    name: "BTC",
+    value: 1000,
+    color: "#F7931A",
+    logo: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png",
+    rank: 1
+  },
+  {
+    id: "ethereum",
+    name: "ETH",
+    value: 500,
+    color: "#627EEA",
+    logo: "https://assets.coingecko.com/coins/images/279/small/ethereum.png",
+    rank: 2
+  },
+  {
+    id: "ripple",
+    name: "XRP",
+    value: 250,
+    color: "#23292F",
+    logo: "https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png",
+    rank: 3
+  },
+  {
+    id: "binancecoin",
+    name: "BNB",
+    value: 100,
+    color: "#F3BA2F",
+    logo: "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png",
+    rank: 4
+  },
+  {
+    id: "solana",
+    name: "SOL",
+    value: 50,
+    color: "#14F195",
+    logo: "https://assets.coingecko.com/coins/images/4128/small/solana.png",
+    rank: 5
+  },
+  {
+    id: "celo",
+    name: "CELO",
+    value: 25,
+    color: "#FBCC5C",
+    logo: "https://assets.coingecko.com/coins/images/11090/small/InjXBNx9_400x400.jpg",
+    rank: 6
+  },
+  {
+    id: "dogecoin",
+    name: "DOGE",
+    value: 10,
+    color: "#C2A633",
+    logo: "https://assets.coingecko.com/coins/images/5/small/dogecoin.png",
+    rank: 7
+  },
+  {
+    id: "miss",
+    name: "MISS",
+    value: 0,
+    color: "#EF4444",
+    logo: "",
+    rank: 8
+  },
 ];
 
 export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: JackpotMachineProps) {
@@ -192,13 +250,11 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
         }}
         className="flex flex-col items-center justify-center"
       >
-        {/* Symbole Crypto */}
+        {/* Logo Crypto */}
         <motion.div
-          className="text-8xl font-black mb-2"
+          className="mb-4 relative w-24 h-24 flex items-center justify-center"
           style={{
-            color: symbol.color,
             filter: isSpinning ? 'blur(3px)' : 'blur(0px)',
-            textShadow: `0 0 20px ${symbol.color}50`,
           }}
           animate={{
             scale: isSpinning ? [1, 0.95, 1] : [1, 1.1, 1],
@@ -208,7 +264,29 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
             repeat: isSpinning ? Infinity : Infinity,
           }}
         >
-          {symbol.symbol}
+          {symbol.logo ? (
+            <Image
+              src={symbol.logo}
+              alt={symbol.name}
+              width={96}
+              height={96}
+              className="rounded-full"
+              style={{
+                boxShadow: `0 0 30px ${symbol.color}80`,
+              }}
+              unoptimized
+            />
+          ) : (
+            <div
+              className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-black text-white"
+              style={{
+                backgroundColor: symbol.color,
+                boxShadow: `0 0 30px ${symbol.color}80`,
+              }}
+            >
+              ✕
+            </div>
+          )}
         </motion.div>
 
         {/* Nom de la crypto */}

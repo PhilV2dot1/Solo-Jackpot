@@ -5,15 +5,16 @@ import { getFarcasterUser } from "@/lib/farcaster";
 export type GameState = "idle" | "spinning" | "revealing" | "result";
 export type GameMode = "free" | "onchain";
 
+// Gains basés sur Market Cap crypto (BTC = le plus élevé)
 const WHEEL_OUTCOMES = [
-  { points: 10, weight: 25, isJackpot: false },
-  { points: 25, weight: 20, isJackpot: false },
-  { points: 50, weight: 15, isJackpot: false },
-  { points: 100, weight: 15, isJackpot: false },
-  { points: 250, weight: 10, isJackpot: false },
-  { points: 500, weight: 8, isJackpot: false },
-  { points: 1000, weight: 2, isJackpot: true }, // Jackpot!
-  { points: 0, weight: 5, isJackpot: false }, // Lose
+  { points: 1000, weight: 2, isJackpot: true },  // BTC - Jackpot! (Rank #1)
+  { points: 500, weight: 5, isJackpot: false },  // ETH (Rank #2)
+  { points: 250, weight: 8, isJackpot: false },  // XRP (Rank #3)
+  { points: 100, weight: 12, isJackpot: false }, // BNB (Rank #4)
+  { points: 50, weight: 15, isJackpot: false },  // SOL (Rank #5)
+  { points: 25, weight: 18, isJackpot: false },  // CELO (Rank #6)
+  { points: 10, weight: 20, isJackpot: false },  // DOGE (Rank #7)
+  { points: 0, weight: 20, isJackpot: false },   // MISS - Lose
 ];
 
 function getRandomOutcome(): GameResult {
