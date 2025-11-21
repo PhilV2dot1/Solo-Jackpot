@@ -23,29 +23,46 @@ export default function Home() {
 
   const [isSpinning, setIsSpinning] = useState(false);
 
+  const [showResult, setShowResult] = useState(false);
+
   const handleSpin = async () => {
     setIsSpinning(true);
+    setShowResult(false);
     try {
       await spin();
-    } finally {
-      setTimeout(() => setIsSpinning(false), 3000);
+      // Wait for spin animation to complete
+      setTimeout(() => {
+        setIsSpinning(false);
+      }, 3000);
+    } catch (error) {
+      setIsSpinning(false);
     }
   };
 
-  return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-            Solo Jackpot 🎰
-          </h1>
-          <p className="text-gray-300">Spin the wheel and win big!</p>
+  const handleSpinComplete = () => {
+    // Show result only after reels have stopped
+    setShowResult(true);
+  };
 
-          {/* Score Display */}
-          <div className="mt-4 flex items-center justify-center gap-2 text-2xl font-bold text-yellow-400">
-            <Trophy className="w-6 h-6" />
-            {totalScore} points
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] text-gray-900">
+      <div className="container mx-auto px-4 py-8 max-w-2xl">
+        {/* Header moderne Celo */}
+        <div className="text-center mb-8">
+          <div className="bg-black/90 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border-4 border-[#35D07F]">
+            <h1 className="text-5xl font-black mb-2 bg-gradient-to-r from-[#FBCC5C] via-white to-[#35D07F] bg-clip-text text-transparent">
+              CRYPTO JACKPOT
+            </h1>
+            <p className="text-[#35D07F] text-lg font-semibold">Spin & Win on Celo Blockchain</p>
+
+            {/* Score Display */}
+            <div className="mt-6 flex items-center justify-center gap-3 bg-gradient-to-r from-[#35D07F]/20 to-[#FBCC5C]/20 rounded-2xl p-4 border-2 border-[#FBCC5C]">
+              <Trophy className="w-8 h-8 text-[#FBCC5C]" />
+              <span className="text-4xl font-black bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] bg-clip-text text-transparent">
+                {totalScore}
+              </span>
+              <span className="text-white font-bold">POINTS</span>
+            </div>
           </div>
         </div>
 
@@ -60,10 +77,11 @@ export default function Home() {
         )}
 
         {/* Game Area */}
-        <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border-4 border-yellow-500/30">
+        <div className="bg-black/80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border-4 border-[#35D07F]">
           <JackpotMachine
             isSpinning={isSpinning}
             finalValue={lastResult?.score}
+            onSpinComplete={handleSpinComplete}
           />
 
           <div className="mt-8 flex flex-col items-center gap-4">
@@ -73,23 +91,23 @@ export default function Home() {
               mode={mode}
             />
 
-            {lastResult && state === "result" && (
+            {lastResult && showResult && (
               <ResultDisplay result={lastResult} />
             )}
 
-            {lastResult && state === "result" && (
+            {lastResult && showResult && (
               <FarcasterShare score={lastResult.score} />
             )}
           </div>
         </div>
 
-        {/* Leaderboard Link */}
+        {/* Leaderboard Link moderne */}
         <div className="mt-8 text-center">
           <Link
             href="/leaderboard"
-            className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors"
+            className="inline-flex items-center gap-3 bg-black/90 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold transition-all border-2 border-[#35D07F] hover:border-[#FBCC5C] hover:shadow-[0_0_30px_#35D07F]"
           >
-            <Trophy className="w-5 h-5" />
+            <Trophy className="w-6 h-6 text-[#FBCC5C]" />
             View Leaderboard
           </Link>
         </div>
