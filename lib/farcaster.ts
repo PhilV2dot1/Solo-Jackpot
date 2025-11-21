@@ -19,9 +19,9 @@ export async function initializeFarcaster() {
   }
 }
 
-export function getFarcasterUser(): FarcasterUser | null {
+export async function getFarcasterUser(): Promise<FarcasterUser | null> {
   try {
-    const context = sdk.context;
+    const context = await sdk.context;
     if (!context || !context.user) {
       return null;
     }
@@ -38,9 +38,10 @@ export function getFarcasterUser(): FarcasterUser | null {
   }
 }
 
-export function isInFarcasterFrame(): boolean {
+export async function isInFarcasterFrame(): Promise<boolean> {
   try {
-    return sdk.context?.client?.clientFid !== undefined;
+    const context = await sdk.context;
+    return context?.client?.clientFid !== undefined;
   } catch (error) {
     return false;
   }

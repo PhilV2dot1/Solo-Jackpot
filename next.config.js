@@ -3,6 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
+    // Add React Native fallback to suppress MetaMask SDK warnings
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      '@react-native-async-storage/async-storage': false,
+    };
     return config;
   },
 };

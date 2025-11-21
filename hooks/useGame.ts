@@ -51,7 +51,7 @@ export function useGame() {
         const result = getRandomOutcome();
 
         // Submit to free play API
-        const farcasterUser = getFarcasterUser();
+        const farcasterUser = await getFarcasterUser();
         if (farcasterUser) {
           await fetch("/api/game/spin", {
             method: "POST",
