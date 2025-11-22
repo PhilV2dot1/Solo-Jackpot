@@ -13,7 +13,7 @@ const WHEEL_OUTCOMES = [
   { points: 100, weight: 12, isJackpot: false }, // BNB (Rank #4)
   { points: 50, weight: 15, isJackpot: false },  // SOL (Rank #5)
   { points: 25, weight: 18, isJackpot: false },  // CELO (Rank #6)
-  { points: 10, weight: 20, isJackpot: false },  // DOGE (Rank #7)
+  { points: 10, weight: 20, isJackpot: false },  // OP (Rank #7)
   { points: 0, weight: 20, isJackpot: false },   // MISS - Lose
 ];
 

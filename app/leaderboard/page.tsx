@@ -43,24 +43,24 @@ export default function LeaderboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FCFF52] text-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-[#FCFF52]/30 text-gray-900">
       <div className="container mx-auto px-3 py-4 max-w-md">
         {/* Header compact */}
         <div className="text-center mb-4">
-          <h1 className="text-2xl font-black bg-gradient-to-r from-[#FBCC5C] via-black to-[#35D07F] bg-clip-text text-transparent">
+          <h1 className="text-2xl font-black bg-gradient-to-r from-gray-800 via-[#FCFF52] to-gray-800 bg-clip-text text-transparent">
             🏆 LEADERBOARD
           </h1>
         </div>
 
         {/* Mode Toggle compact */}
         <div className="mb-4 flex justify-center">
-          <div className="bg-black/90 backdrop-blur-lg rounded-full p-1 flex gap-1">
+          <div className="bg-white/95 backdrop-blur-lg rounded-full p-1 flex gap-1 border-2 border-gray-300">
             <button
               onClick={() => setMode("free")}
               className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "free"
-                  ? "bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] text-black shadow-lg"
-                  : "text-gray-300 hover:text-white"
+                  ? "bg-gray-800 text-white shadow-lg"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Free Play
@@ -69,8 +69,8 @@ export default function LeaderboardPage() {
               onClick={() => setMode("onchain")}
               className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "onchain"
-                  ? "bg-gradient-to-r from-[#35D07F] to-[#FBCC5C] text-black shadow-lg"
-                  : "text-gray-300 hover:text-white"
+                  ? "bg-gray-800 text-white shadow-lg"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
             >
               On-Chain
@@ -97,8 +97,8 @@ export default function LeaderboardPage() {
                   key={entry.fid}
                   className={`flex items-center justify-between p-3 rounded-lg transition-all ${
                     entry.rank <= 3
-                      ? "bg-gradient-to-r from-[#FBCC5C]/30 to-[#35D07F]/30 border border-[#FBCC5C]"
-                      : "bg-black/20 hover:bg-black/30"
+                      ? "bg-gradient-to-r from-[#FCFF52]/40 to-gray-100 border-2 border-[#FCFF52]"
+                      : "bg-white/50 hover:bg-white/70 border border-gray-200"
                   }`}
                 >
                   <div className="flex items-center gap-3 flex-1">
@@ -132,7 +132,7 @@ export default function LeaderboardPage() {
         <div className="mt-4 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] hover:from-[#35D07F] hover:to-[#FBCC5C] rounded-lg font-semibold text-black transition-all shadow-md hover:shadow-lg text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg text-sm border-2 border-gray-700 hover:border-[#FCFF52]"
           >
             <Home className="w-4 h-4" />
             Back to Game

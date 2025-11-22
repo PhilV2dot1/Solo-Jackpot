@@ -62,11 +62,11 @@ const CRYPTO_SYMBOLS = [
     rank: 6
   },
   {
-    id: "dogecoin",
-    name: "DOGE",
+    id: "optimism",
+    name: "OP",
     value: 10,
-    color: "#C2A633",
-    logo: "https://assets.coingecko.com/coins/images/5/small/dogecoin.png",
+    color: "#FF0420",
+    logo: "https://assets.coingecko.com/coins/images/25244/small/Optimism.png",
     rank: 7
   },
   {
@@ -169,10 +169,10 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
     <div className="relative bg-gradient-to-b from-gray-50 to-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-gray-300">
       <motion.div
         animate={{
-          y: isSpinning ? [0, -200, -400, -600, -800, -1000] : 0,
+          y: isSpinning ? [0, -150, -300, -450, -600, -750, -900, -1050, -1200, -1350, -1500] : 0,
         }}
         transition={{
-          duration: isSpinning ? 1.2 : 0.4,
+          duration: isSpinning ? 2 : 0.5,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
           ease: isSpinning ? "linear" : "easeOut",
