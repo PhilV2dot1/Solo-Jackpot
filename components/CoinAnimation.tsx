@@ -7,7 +7,7 @@ export function CoinAnimation({ show }: { show: boolean }) {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50">
-      {[...Array(20)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
           initial={{
@@ -23,11 +23,11 @@ export function CoinAnimation({ show }: { show: boolean }) {
             opacity: [0, 1, 0],
           }}
           transition={{
-            duration: 2,
-            delay: i * 0.1,
+            duration: 1.5,
+            delay: i * 0.15,
             ease: "easeOut",
           }}
-          className="absolute text-4xl"
+          className="absolute text-3xl"
         >
           💰
         </motion.div>

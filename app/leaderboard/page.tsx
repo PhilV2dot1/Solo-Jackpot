@@ -36,90 +36,89 @@ export default function LeaderboardPage() {
   }, [fetchLeaderboard]);
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="w-6 h-6 text-yellow-400" />;
-    if (rank === 2) return <Medal className="w-6 h-6 text-gray-300" />;
-    if (rank === 3) return <Award className="w-6 h-6 text-amber-600" />;
-    return <span className="text-gray-400 font-bold">#{rank}</span>;
+    if (rank === 1) return <Trophy className="w-5 h-5 text-yellow-500" />;
+    if (rank === 2) return <Medal className="w-5 h-5 text-gray-400" />;
+    if (rank === 3) return <Award className="w-5 h-5 text-orange-500" />;
+    return <span className="text-gray-700 font-bold text-sm">#{rank}</span>;
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-            🏆 Leaderboard
+    <main className="min-h-screen bg-gradient-to-br from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] text-gray-900">
+      <div className="container mx-auto px-3 py-4 max-w-md">
+        {/* Header compact */}
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-black bg-gradient-to-r from-[#FBCC5C] via-black to-[#35D07F] bg-clip-text text-transparent">
+            🏆 LEADERBOARD
           </h1>
-          <p className="text-gray-300">Top players ranked by high score</p>
         </div>
 
-        {/* Mode Toggle */}
-        <div className="mb-6 flex justify-center">
-          <div className="bg-white/10 backdrop-blur-lg rounded-full p-1 flex gap-1">
+        {/* Mode Toggle compact */}
+        <div className="mb-4 flex justify-center">
+          <div className="bg-black/90 backdrop-blur-lg rounded-full p-1 flex gap-1">
             <button
               onClick={() => setMode("free")}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "free"
-                  ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
+                  ? "bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] text-black shadow-lg"
                   : "text-gray-300 hover:text-white"
               }`}
             >
-              🎮 Free Play
+              Free Play
             </button>
             <button
               onClick={() => setMode("onchain")}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 ${
+              className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "onchain"
-                  ? "bg-gradient-to-r from-green-500 to-teal-500 text-white shadow-lg"
+                  ? "bg-gradient-to-r from-[#35D07F] to-[#FBCC5C] text-black shadow-lg"
                   : "text-gray-300 hover:text-white"
               }`}
             >
-              ⛓️ On-Chain
+              On-Chain
             </button>
           </div>
         </div>
 
         {/* Leaderboard */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 shadow-xl">
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
-              <p className="mt-4 text-gray-300">Loading leaderboard...</p>
+            <div className="text-center py-8">
+              <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-yellow-400"></div>
+              <p className="mt-3 text-gray-700 text-sm">Loading...</p>
             </div>
           ) : entries.length === 0 ? (
-            <div className="text-center py-12">
-              <Trophy className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-              <p className="text-gray-300 text-lg">No entries yet. Be the first to play!</p>
+            <div className="text-center py-8">
+              <Trophy className="w-12 h-12 mx-auto mb-3 text-gray-500" />
+              <p className="text-gray-700">No entries yet. Be the first!</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2">
               {entries.map((entry) => (
                 <div
                   key={entry.fid}
-                  className={`flex items-center justify-between p-4 rounded-xl transition-all ${
+                  className={`flex items-center justify-between p-3 rounded-lg transition-all ${
                     entry.rank <= 3
-                      ? "bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-400/30"
-                      : "bg-white/5 hover:bg-white/10"
+                      ? "bg-gradient-to-r from-[#FBCC5C]/30 to-[#35D07F]/30 border border-[#FBCC5C]"
+                      : "bg-black/20 hover:bg-black/30"
                   }`}
                 >
-                  <div className="flex items-center gap-4 flex-1">
-                    <div className="w-12 flex items-center justify-center">
+                  <div className="flex items-center gap-3 flex-1">
+                    <div className="w-10 flex items-center justify-center">
                       {getRankIcon(entry.rank)}
                     </div>
                     <div>
-                      <div className="font-semibold">
+                      <div className="font-semibold text-sm">
                         {entry.username || `Player #${entry.fid}`}
                       </div>
-                      <div className="text-sm text-gray-400">
-                        {entry.gamesPlayed} games played
+                      <div className="text-xs text-gray-600">
+                        {entry.gamesPlayed} games
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-yellow-400">
+                    <div className="text-xl font-bold text-[#FBCC5C]">
                       {entry.highScore}
                     </div>
-                    <div className="text-sm text-gray-400">
+                    <div className="text-xs text-gray-600">
                       Total: {entry.totalScore}
                     </div>
                   </div>
@@ -130,12 +129,12 @@ export default function LeaderboardPage() {
         </div>
 
         {/* Back Button */}
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] hover:from-[#35D07F] hover:to-[#FBCC5C] rounded-lg font-semibold text-black transition-all shadow-md hover:shadow-lg text-sm"
           >
-            <Home className="w-5 h-5" />
+            <Home className="w-4 h-4" />
             Back to Game
           </Link>
         </div>

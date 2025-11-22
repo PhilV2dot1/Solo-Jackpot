@@ -80,52 +80,43 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
         onClick={handleSave}
         disabled={disabled || status === "saving" || status === "success"}
         className={`
-          inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold
-          transition-all duration-200 shadow-lg
+          inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm
+          transition-all duration-200 shadow-md
           ${
             status === "success"
-              ? "bg-green-500 text-white border-2 border-green-400"
+              ? "bg-green-500 text-white border border-green-400"
               : status === "error"
-              ? "bg-red-500 text-white border-2 border-red-400"
-              : "bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] text-black border-2 border-[#35D07F] hover:shadow-[0_0_30px_#35D07F] hover:scale-105"
+              ? "bg-red-500 text-white border border-red-400"
+              : "bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] text-black border border-[#35D07F] hover:scale-105"
           }
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
         `}
       >
         {status === "saving" ? (
           <>
-            <div className="w-6 h-6 border-3 border-black border-t-transparent rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
             Saving...
           </>
         ) : status === "success" ? (
           <>
-            <Check className="w-6 h-6" />
-            Saved to Leaderboard!
+            <Check className="w-5 h-5" />
+            Saved! Rank #{rank}
           </>
         ) : status === "error" ? (
           <>
-            <AlertCircle className="w-6 h-6" />
+            <AlertCircle className="w-5 h-5" />
             Try Again
           </>
         ) : (
           <>
-            <Save className="w-6 h-6" />
-            Save Score ({score} pts)
+            <Save className="w-5 h-5" />
+            Save Score
           </>
         )}
       </button>
 
-      {message && (
-        <div
-          className={`
-            text-sm font-semibold px-4 py-2 rounded-lg
-            ${
-              status === "success"
-                ? "bg-green-500/20 text-green-300 border border-green-500"
-                : "bg-red-500/20 text-red-300 border border-red-500"
-            }
-          `}
-        >
+      {message && status === "error" && (
+        <div className="text-xs font-semibold px-3 py-1 rounded-lg bg-red-500/20 text-red-300 border border-red-500">
           {message}
         </div>
       )}

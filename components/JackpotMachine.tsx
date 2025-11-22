@@ -123,56 +123,11 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
 
   return (
     <div className="relative">
-      {/* Machine Frame avec couleurs Celo */}
-      <div className="bg-gradient-to-b from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] rounded-3xl p-6 shadow-2xl border-8 border-[#35D07F]">
-        {/* Top Header avec branding Celo */}
-        <div className="text-center mb-4">
-          <div className="bg-gradient-to-r from-black via-gray-900 to-black rounded-t-3xl px-8 py-4 -mx-6 -mt-6 mb-6 border-4 border-[#FBCC5C]">
-            <motion.h2
-              className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] tracking-wider"
-              animate={{
-                backgroundPosition: isSpinning ? ["0% 50%", "100% 50%", "0% 50%"] : "0% 50%",
-              }}
-              transition={{
-                duration: 2,
-                repeat: isSpinning ? Infinity : 0,
-              }}
-              style={{
-                backgroundSize: "200% 200%",
-              }}
-            >
-              CRYPTO JACKPOT
-            </motion.h2>
-            <p className="text-[#35D07F] text-sm mt-2 font-semibold">Powered by Celo</p>
-          </div>
-        </div>
-
-        {/* Lumières LED animées */}
-        <div className="absolute top-0 left-0 right-0 h-3 flex justify-around px-4">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-4 h-4 rounded-full"
-              style={{
-                backgroundColor: i % 2 === 0 ? "#FBCC5C" : "#35D07F",
-                boxShadow: `0 0 15px ${i % 2 === 0 ? "#FBCC5C" : "#35D07F"}`,
-              }}
-              animate={{
-                opacity: isSpinning ? [1, 0.3, 1] : 1,
-                scale: isSpinning ? [1, 1.2, 1] : 1,
-              }}
-              transition={{
-                duration: 0.5,
-                repeat: isSpinning ? Infinity : 0,
-                delay: i * 0.1,
-              }}
-            />
-          ))}
-        </div>
-
+      {/* Machine Frame simplifiée - Mobile optimized */}
+      <div className="bg-gradient-to-b from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] rounded-2xl p-3 shadow-xl border-2 border-[#35D07F]">
         {/* Reels Container */}
-        <div className="bg-gradient-to-b from-gray-900 to-black rounded-2xl p-8 shadow-inner border-4 border-[#FBCC5C]">
-          <div className="grid grid-cols-3 gap-6">
+        <div className="bg-gradient-to-b from-gray-900 to-black rounded-xl p-4 shadow-inner border-2 border-[#FBCC5C]">
+          <div className="grid grid-cols-3 gap-3">
             {/* Reel 1 */}
             <CryptoReel
               symbol={CRYPTO_SYMBOLS[reel1]}
@@ -196,36 +151,9 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
           </div>
         </div>
 
-        {/* Payout Line avec couleur Celo */}
-        <div className="absolute left-8 right-8 top-1/2 h-1 bg-gradient-to-r from-transparent via-[#35D07F] to-transparent shadow-[0_0_20px_#35D07F] pointer-events-none" />
-
-        {/* Bottom Lights */}
-        <div className="absolute bottom-0 left-0 right-0 h-3 flex justify-around px-4">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-4 h-4 rounded-full"
-              style={{
-                backgroundColor: i % 2 === 0 ? "#35D07F" : "#FBCC5C",
-                boxShadow: `0 0 15px ${i % 2 === 0 ? "#35D07F" : "#FBCC5C"}`,
-              }}
-              animate={{
-                opacity: isSpinning ? [0.3, 1, 0.3] : 1,
-                scale: isSpinning ? [1, 1.2, 1] : 1,
-              }}
-              transition={{
-                duration: 0.5,
-                repeat: isSpinning ? Infinity : 0,
-                delay: i * 0.1,
-              }}
-            />
-          ))}
-        </div>
+        {/* Payout Line - Simplifié */}
+        <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-[#35D07F] to-transparent opacity-60 pointer-events-none" />
       </div>
-
-      {/* Side Decorations Celo colors */}
-      <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-10 h-40 bg-gradient-to-r from-[#35D07F] to-[#FBCC5C] rounded-r-full shadow-xl" />
-      <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-10 h-40 bg-gradient-to-l from-[#35D07F] to-[#FBCC5C] rounded-l-full shadow-xl" />
     </div>
   );
 }
@@ -238,7 +166,7 @@ interface CryptoReelProps {
 
 function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
   return (
-    <div className="relative bg-white rounded-2xl p-6 shadow-2xl overflow-hidden border-4 border-[#35D07F]">
+    <div className="relative bg-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-[#35D07F]">
       <motion.div
         animate={{
           y: isSpinning ? [-100, 0] : 0,
@@ -250,38 +178,38 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
         }}
         className="flex flex-col items-center justify-center"
       >
-        {/* Logo Crypto */}
+        {/* Logo Crypto - Taille réduite pour mobile */}
         <motion.div
-          className="mb-4 relative w-24 h-24 flex items-center justify-center"
+          className="mb-2 relative w-16 h-16 flex items-center justify-center"
           style={{
-            filter: isSpinning ? 'blur(3px)' : 'blur(0px)',
+            filter: isSpinning ? 'blur(2px)' : 'blur(0px)',
           }}
           animate={{
-            scale: isSpinning ? [1, 0.95, 1] : [1, 1.1, 1],
+            scale: isSpinning ? [1, 0.95, 1] : [1, 1.05, 1],
           }}
           transition={{
             duration: isSpinning ? 0.2 : 2,
-            repeat: isSpinning ? Infinity : Infinity,
+            repeat: Infinity,
           }}
         >
           {symbol.logo ? (
             <Image
               src={symbol.logo}
               alt={symbol.name}
-              width={96}
-              height={96}
+              width={64}
+              height={64}
               className="rounded-full"
               style={{
-                boxShadow: `0 0 30px ${symbol.color}80`,
+                boxShadow: `0 0 20px ${symbol.color}60`,
               }}
               unoptimized
             />
           ) : (
             <div
-              className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-black text-white"
+              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black text-white"
               style={{
                 backgroundColor: symbol.color,
-                boxShadow: `0 0 30px ${symbol.color}80`,
+                boxShadow: `0 0 20px ${symbol.color}60`,
               }}
             >
               ✕
@@ -291,41 +219,24 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
 
         {/* Nom de la crypto */}
         <div
-          className="text-sm font-bold px-3 py-1 rounded-full"
+          className="text-xs font-bold px-2 py-0.5 rounded-full"
           style={{
             backgroundColor: `${symbol.color}20`,
             color: symbol.color,
-            border: `2px solid ${symbol.color}`,
+            border: `1px solid ${symbol.color}`,
           }}
         >
           {symbol.name}
         </div>
       </motion.div>
 
-      {/* Shine Effect */}
+      {/* Shine Effect simplifié - seulement si pas en train de spinner */}
       {!isSpinning && (
         <motion.div
           initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 100, opacity: [0, 0.5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-          className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 pointer-events-none"
-        />
-      )}
-
-      {/* Glow effect when not spinning */}
-      {!isSpinning && (
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none"
-          style={{
-            boxShadow: `inset 0 0 30px ${symbol.color}30`,
-          }}
-          animate={{
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
+          animate={{ x: 100, opacity: [0, 0.3, 0] }}
+          transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
+          className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 pointer-events-none"
         />
       )}
     </div>
