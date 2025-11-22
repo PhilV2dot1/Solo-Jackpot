@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { JackpotMachine } from "@/components/JackpotMachine";
 import { SpinButton } from "@/components/SpinButton";
 import { ResultDisplay } from "@/components/ResultDisplay";
@@ -23,17 +23,34 @@ export default function Home() {
   } = useGame();
 
   const [isSpinning, setIsSpinning] = useState(false);
-
   const [showResult, setShowResult] = useState(false);
 
+  // Refs to store timeout IDs for cleanup
+  const spinTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const resultTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (spinTimeoutRef.current) clearTimeout(spinTimeoutRef.current);
+      if (resultTimeoutRef.current) clearTimeout(resultTimeoutRef.current);
+    };
+  }, []);
+
   const handleSpin = async () => {
+    // Clear any existing timeouts to prevent conflicts
+    if (spinTimeoutRef.current) clearTimeout(spinTimeoutRef.current);
+    if (resultTimeoutRef.current) clearTimeout(resultTimeoutRef.current);
+
     setIsSpinning(true);
     setShowResult(false);
+
     try {
       await spin();
       // Reduced spin time for faster gameplay (1.5s spin + 1.4s settling = 2.9s total)
-      setTimeout(() => {
+      spinTimeoutRef.current = setTimeout(() => {
         setIsSpinning(false);
+        spinTimeoutRef.current = null;
       }, 1500);
     } catch (error) {
       setIsSpinning(false);
@@ -41,12 +58,16 @@ export default function Home() {
   };
 
   const handleSpinComplete = () => {
+    // Clear any existing result timeout
+    if (resultTimeoutRef.current) clearTimeout(resultTimeoutRef.current);
+
     // Only show result if not currently spinning
     if (!isSpinning) {
       // Short delay for visual confirmation after reels stop (500ms)
       // Sequence: Reels stop → Visual result visible → Points displayed → Score updates
-      setTimeout(() => {
+      resultTimeoutRef.current = setTimeout(() => {
         setShowResult(true);
+        resultTimeoutRef.current = null;
       }, 500);
     }
   };
