@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  getTopScoresFromChain,
+  convertSessionsToLeaderboard,
+} from "@/lib/leaderboard";
 
 // In-memory storage for demo (replace with database in production)
 interface LeaderboardEntry {
@@ -19,12 +23,24 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "100");
 
     if (mode === "onchain") {
-      // TODO: Fetch from blockchain
-      return NextResponse.json({
-        mode: "onchain",
-        entries: [],
-        message: "On-chain leaderboard coming soon!",
-      });
+      // Fetch from Celo blockchain
+      try {
+        const sessions = await getTopScoresFromChain(limit);
+        const entries = convertSessionsToLeaderboard(sessions);
+
+        return NextResponse.json({
+          mode: "onchain",
+          entries,
+          total: entries.length,
+        });
+      } catch (error) {
+        console.error("Error fetching on-chain leaderboard:", error);
+        return NextResponse.json({
+          mode: "onchain",
+          entries: [],
+          error: "Failed to fetch on-chain leaderboard",
+        });
+      }
     }
 
     // Get free play leaderboard
@@ -53,11 +69,23 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { fid, username, score } = body;
+    const { fid, username, score, mode } = body;
 
     if (!fid || typeof score !== "number") {
       return NextResponse.json(
         { error: "Invalid request parameters" },
+        { status: 400 }
+      );
+    }
+
+    // On-chain mode requires wallet transaction
+    if (mode === "onchain") {
+      return NextResponse.json(
+        {
+          error: "On-chain scores must be submitted via wallet transaction",
+          message:
+            "Please use your connected wallet to submit scores to the blockchain",
+        },
         { status: 400 }
       );
     }

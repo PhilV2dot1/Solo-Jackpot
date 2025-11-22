@@ -1,18 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Trophy, Save, Check, AlertCircle } from "lucide-react";
 import { getFarcasterUser } from "@/lib/farcaster";
+import { useLeaderboardContract } from "@/hooks/useLeaderboardContract";
 
 interface SaveToLeaderboardProps {
   score: number;
   disabled?: boolean;
+  mode?: "free" | "onchain";
 }
 
-export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
-  const [status, setStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
+export function SaveToLeaderboard({
+  score,
+  disabled,
+  mode = "free",
+}: SaveToLeaderboardProps) {
+  const [status, setStatus] = useState<"idle" | "saving" | "success" | "error">(
+    "idle"
+  );
   const [rank, setRank] = useState<number | null>(null);
   const [message, setMessage] = useState("");
+
+  // On-chain contract interaction
+  const {
+    isConnected,
+    submitScore: submitScoreToChain,
+    isPending,
+    isConfirmed,
+    error: contractError,
+    hasActiveSession,
+    sessionId,
+  } = useLeaderboardContract();
+
+  // Watch for on-chain transaction confirmation
+  useEffect(() => {
+    if (mode === "onchain" && isConfirmed && status === "saving") {
+      setStatus("success");
+      setMessage("Score saved on-chain!");
+      setTimeout(() => {
+        setStatus("idle");
+        setMessage("");
+      }, 5000);
+    }
+  }, [isConfirmed, mode, status]);
+
+  // Watch for on-chain transaction errors
+  useEffect(() => {
+    if (mode === "onchain" && contractError && status === "saving") {
+      setStatus("error");
+      setMessage("Transaction failed. Try again!");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
+  }, [contractError, mode, status]);
 
   const handleSave = async () => {
     if (score === 0) {
@@ -36,7 +76,29 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
         return;
       }
 
-      // Save to leaderboard
+      // Handle on-chain mode
+      if (mode === "onchain") {
+        if (!isConnected) {
+          setMessage("Please connect your wallet first!");
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 3000);
+          return;
+        }
+
+        if (!hasActiveSession || !sessionId) {
+          setMessage("No active game session. Please play a game first!");
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 3000);
+          return;
+        }
+
+        // Submit score using the tracked sessionId from the contract hook
+        await submitScoreToChain(score);
+        // Transaction state is handled by useEffect watching isConfirmed
+        return;
+      }
+
+      // Free mode - save via API
       const response = await fetch("/api/leaderboard", {
         method: "POST",
         headers: {
@@ -46,6 +108,7 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
           fid: user.fid,
           username: user.username || user.displayName,
           score: score,
+          mode: "free",
         }),
       });
 
@@ -92,10 +155,10 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
         `}
       >
-        {status === "saving" ? (
+        {status === "saving" || isPending ? (
           <>
             <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-            Saving...
+            {mode === "onchain" ? "Confirming..." : "Saving..."}
           </>
         ) : status === "success" ? (
           <>

@@ -102,18 +102,18 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
       const symbolIndex = CRYPTO_SYMBOLS.findIndex(s => s.value === finalValue);
       const targetIndex = symbolIndex >= 0 ? symbolIndex : 7; // Default to MISS
 
-      // Reel 1 stops first
-      setTimeout(() => setReel1(targetIndex), 300);
+      // Reel 1 stops first (faster settling for 3s total)
+      setTimeout(() => setReel1(targetIndex), 200);
       // Reel 2 stops second
-      setTimeout(() => setReel2(targetIndex), 600);
+      setTimeout(() => setReel2(targetIndex), 400);
       // Reel 3 stops last
       setTimeout(() => {
         setReel3(targetIndex);
         // Notify parent that spin is complete
         setTimeout(() => {
           if (onSpinComplete) onSpinComplete();
-        }, 500);
-      }, 900);
+        }, 100);
+      }, 600);
     }
 
     return () => {

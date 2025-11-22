@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { JackpotMachine } from "@/components/JackpotMachine";
 import { SpinButton } from "@/components/SpinButton";
 import { ResultDisplay } from "@/components/ResultDisplay";
@@ -9,6 +9,8 @@ import { WalletConnect } from "@/components/WalletConnect";
 import { FarcasterShare } from "@/components/FarcasterShare";
 import { SaveToLeaderboard } from "@/components/SaveToLeaderboard";
 import { useGame } from "@/hooks/useGame";
+import { useLeaderboardContract } from "@/hooks/useLeaderboardContract";
+import { getFarcasterUser } from "@/lib/farcaster";
 import { Trophy } from "lucide-react";
 import Link from "next/link";
 
@@ -22,20 +24,64 @@ export default function Home() {
     totalScore
   } = useGame();
 
-  const [isSpinning, setIsSpinning] = useState(false);
+  const {
+    startParty,
+    hasActiveSession,
+    isStartingParty,
+    sessionId,
+    resetSession,
+    isConnected,
+  } = useLeaderboardContract();
 
+  const [isSpinning, setIsSpinning] = useState(false);
   const [showResult, setShowResult] = useState(false);
+
+  // Reset session when switching modes
+  useEffect(() => {
+    if (mode === "free") {
+      resetSession();
+    }
+  }, [mode, resetSession]);
 
   const handleSpin = async () => {
     setIsSpinning(true);
     setShowResult(false);
+
     try {
+      // For on-chain mode, start a party if no active session
+      if (mode === "onchain" && !hasActiveSession) {
+        const user = await getFarcasterUser();
+        if (!user) {
+          alert("Please connect your Farcaster account first!");
+          setIsSpinning(false);
+          return;
+        }
+
+        if (!isConnected) {
+          alert("Please connect your wallet first!");
+          setIsSpinning(false);
+          return;
+        }
+
+        // Start a new party (session) on-chain
+        try {
+          await startParty(user.fid);
+          console.log("Party started! Session will be tracked once confirmed.");
+        } catch (error) {
+          console.error("Failed to start party:", error);
+          alert("Failed to start game session. Please try again.");
+          setIsSpinning(false);
+          return;
+        }
+      }
+
       await spin();
-      // Reduced spin time for faster gameplay (1.5s spin + 1.4s settling = 2.9s total)
+      // Optimized for 3s total: 2s spin + 0.7s settling + 0.3s result delay
       setTimeout(() => {
         setIsSpinning(false);
-      }, 1500);
+      }, 2000);
     } catch (error) {
+      console.error("Spin error:", error);
       setIsSpinning(false);
     }
   };
@@ -43,11 +89,11 @@ export default function Home() {
   const handleSpinComplete = () => {
     // Only show result if not currently spinning
     if (!isSpinning) {
-      // Short delay for visual confirmation after reels stop (500ms)
+      // Optimized 300ms delay for 3s total gameplay cycle
       // Sequence: Reels stop → Visual result visible → Points displayed → Score updates
       setTimeout(() => {
         setShowResult(true);
-      }, 500);
+      }, 300);
     }
   };
 
@@ -77,8 +123,28 @@ export default function Home() {
 
         {/* Wallet Connect (On-Chain Mode Only) */}
         {mode === "onchain" && (
-          <div className="mb-3">
+          <div className="mb-3 space-y-2">
             <WalletConnect />
+            {/* Session Status Indicator */}
+            {isConnected && (
+              <div className="text-center">
+                {hasActiveSession && sessionId ? (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500 rounded-lg text-xs font-semibold text-green-300">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Active Session #{sessionId.toString()}
+                  </div>
+                ) : isStartingParty ? (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500 rounded-lg text-xs font-semibold text-yellow-300">
+                    <div className="w-2 h-2 border border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+                    Starting Session...
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-500/20 border border-gray-500 rounded-lg text-xs font-semibold text-gray-300">
+                    No Active Session
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 
@@ -93,7 +159,7 @@ export default function Home() {
           <div className="mt-4 flex flex-col items-center gap-3">
             <SpinButton
               onClick={handleSpin}
-              disabled={isSpinning || state === "spinning"}
+              disabled={isSpinning || state === "spinning" || isStartingParty}
               mode={mode}
             />
 
@@ -110,7 +176,11 @@ export default function Home() {
         {/* Save to Leaderboard Button */}
         {totalScore > 0 && (
           <div className="mt-4 text-center">
-            <SaveToLeaderboard score={totalScore} disabled={isSpinning} />
+            <SaveToLeaderboard
+              score={totalScore}
+              disabled={isSpinning}
+              mode={mode}
+            />
           </div>
         )}
 
