@@ -1,0 +1,35 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient Celo colors -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBCC5C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#35D07F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+
+  <!-- Jackpot Machine Frame -->
+  <rect x="212" y="150" width="600" height="724" rx="40" fill="#2C3E50" opacity="0.9"/>
+
+  <!-- Screen -->
+  <rect x="262" y="250" width="500" height="350" rx="20" fill="#1A1A1A"/>
+
+  <!-- Crypto Symbols (simplified) -->
+  <text x="362" y="450" font-size="120" fill="#F7931A" font-family="Arial, sans-serif" font-weight="bold">₿</text>
+  <text x="487" y="450" font-size="120" fill="#627EEA" font-family="Arial, sans-serif" font-weight="bold">Ξ</text>
+  <text x="612" y="450" font-size="120" fill="#FBCC5C" font-family="Arial, sans-serif" font-weight="bold">⬡</text>
+
+  <!-- Title -->
+  <text x="512" y="700" font-size="72" fill="#FBCC5C" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">JACKPOT</text>
+
+  <!-- Subtitle -->
+  <text x="512" y="770" font-size="36" fill="#35D07F" font-family="Arial, sans-serif" text-anchor="middle">Powered by Celo</text>
+
+  <!-- Lights -->
+  <circle cx="262" cy="180" r="15" fill="#FF0000" opacity="0.8"/>
+  <circle cx="762" cy="180" r="15" fill="#FBCC5C" opacity="0.8"/>
+  <circle cx="262" cy="844" r="15" fill="#35D07F" opacity="0.8"/>
+  <circle cx="762" cy="844" r="15" fill="#FF0000" opacity="0.8"/>
+</svg>
