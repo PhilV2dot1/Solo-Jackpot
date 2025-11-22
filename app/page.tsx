@@ -41,8 +41,10 @@ export default function Home() {
   };
 
   const handleSpinComplete = () => {
-    // Show result only after reels have stopped
-    setShowResult(true);
+    // Add delay for suspense before showing result
+    setTimeout(() => {
+      setShowResult(true);
+    }, 800); // 800ms delay for dramatic reveal
   };
 
   return (
