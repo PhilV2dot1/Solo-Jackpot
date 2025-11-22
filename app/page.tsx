@@ -31,7 +31,7 @@ export default function Home() {
     setShowResult(false);
     try {
       await spin();
-      // Wait for spin animation to complete
+      // Wait for spin animation to complete (3s spin + 1.5s settling + 0.8s suspense = 5.3s total)
       setTimeout(() => {
         setIsSpinning(false);
       }, 3000);
@@ -41,10 +41,13 @@ export default function Home() {
   };
 
   const handleSpinComplete = () => {
-    // Add delay for suspense before showing result
-    setTimeout(() => {
-      setShowResult(true);
-    }, 800); // 800ms delay for dramatic reveal
+    // Only show result if not currently spinning
+    if (!isSpinning) {
+      // Add delay to ensure all reels have fully settled (1400ms) + suspense (800ms)
+      setTimeout(() => {
+        setShowResult(true);
+      }, 1500); // Increased delay to ensure reels fully stop before reveal
+    }
   };
 
   return (
