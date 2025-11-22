@@ -67,7 +67,13 @@ export function useGame() {
 
         setState("result");
         setLastResult(result);
-        setTotalScore(prev => prev + result.score);
+
+        // Delay totalScore update to match visual sequence completion
+        // Visual sequence: 1.5s spin stop + 0.9s settling + 0.5s result display = 2.9s
+        // Update total at 3.5s to ensure it appears AFTER result is visible
+        setTimeout(() => {
+          setTotalScore(prev => prev + result.score);
+        }, 3500);
       } else {
         // On-chain mode: Will be implemented with smart contract
         await new Promise(resolve => setTimeout(resolve, 3000));
@@ -78,7 +84,11 @@ export function useGame() {
 
         setState("result");
         setLastResult(result);
-        setTotalScore(prev => prev + result.score);
+
+        // Delay totalScore update to match visual sequence completion
+        setTimeout(() => {
+          setTotalScore(prev => prev + result.score);
+        }, 3500);
       }
     } catch (error) {
       console.error("Spin error:", error);

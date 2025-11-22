@@ -73,22 +73,22 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FCFF52] text-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-[#FCFF52]/30 text-gray-900">
       <div className="container mx-auto px-3 py-4 max-w-md">
-        {/* Header compact - Mobile optimized */}
+        {/* Header - Professional Design */}
         <div className="text-center mb-4">
-          <div className="bg-black/90 backdrop-blur-lg rounded-2xl p-3 shadow-xl border-2 border-[#35D07F]">
-            <h1 className="text-3xl font-black mb-3 bg-gradient-to-r from-[#FBCC5C] via-white to-[#35D07F] bg-clip-text text-transparent">
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-300">
+            <h1 className="text-3xl font-black mb-3 bg-gradient-to-r from-gray-800 via-[#FCFF52] to-gray-800 bg-clip-text text-transparent">
               CRYPTO JACKPOT
             </h1>
 
-            {/* Score Display compact */}
-            <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#35D07F]/20 to-[#FBCC5C]/20 rounded-xl p-2 border border-[#FBCC5C]">
-              <Trophy className="w-5 h-5 text-[#FBCC5C]" />
-              <span className="text-2xl font-black bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] bg-clip-text text-transparent">
+            {/* Score Display */}
+            <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-gray-100 to-[#FCFF52]/20 rounded-xl p-3 border border-gray-300">
+              <Trophy className="w-6 h-6 text-[#FCFF52]" />
+              <span className="text-3xl font-black text-gray-800">
                 {totalScore}
               </span>
-              <span className="text-white text-sm font-bold">PTS</span>
+              <span className="text-gray-600 text-sm font-bold">PTS</span>
             </div>
           </div>
         </div>
@@ -103,8 +103,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* Game Area simplifié */}
-        <div className="bg-black/80 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-[#35D07F]">
+        {/* Game Area - Professional */}
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-300">
           <JackpotMachine
             isSpinning={isSpinning}
             finalValue={lastResult?.score}
@@ -135,13 +135,13 @@ export default function Home() {
           </div>
         )}
 
-        {/* Leaderboard Link compact */}
+        {/* Leaderboard Link */}
         <div className="mt-4 text-center">
           <Link
             href="/leaderboard"
-            className="inline-flex items-center gap-2 bg-black/90 hover:bg-black text-white px-6 py-3 rounded-xl font-bold text-sm transition-all border-2 border-[#35D07F] hover:border-[#FBCC5C]"
+            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all border-2 border-gray-700 hover:border-[#FCFF52] shadow-lg"
           >
-            <Trophy className="w-5 h-5 text-[#FBCC5C]" />
+            <Trophy className="w-5 h-5 text-[#FCFF52]" />
             View Leaderboard
           </Link>
         </div>

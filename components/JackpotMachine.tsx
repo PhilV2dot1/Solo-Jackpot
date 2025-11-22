@@ -123,11 +123,11 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
 
   return (
     <div className="relative">
-      {/* Machine Frame simplifiée - Mobile optimized */}
-      <div className="bg-gradient-to-b from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] rounded-2xl p-3 shadow-xl border-2 border-[#35D07F]">
+      {/* Machine Frame - Professional Design */}
+      <div className="bg-gradient-to-b from-gray-100 to-gray-200 rounded-2xl p-4 shadow-2xl border-2 border-[#FCFF52]">
         {/* Reels Container */}
-        <div className="bg-gradient-to-b from-gray-900 to-black rounded-xl p-4 shadow-inner border-2 border-[#FBCC5C]">
-          <div className="grid grid-cols-3 gap-3">
+        <div className="bg-gradient-to-b from-gray-700 to-gray-800 rounded-xl p-4 shadow-inner border border-gray-600">
+          <div className="grid grid-cols-3 gap-4">
             {/* Reel 1 */}
             <CryptoReel
               symbol={CRYPTO_SYMBOLS[reel1]}
@@ -151,8 +151,8 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
           </div>
         </div>
 
-        {/* Payout Line - Simplifié */}
-        <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-[#35D07F] to-transparent opacity-60 pointer-events-none" />
+        {/* Payout Line - Subtle */}
+        <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-[#FCFF52] to-transparent opacity-40 pointer-events-none" />
       </div>
     </div>
   );
@@ -166,13 +166,13 @@ interface CryptoReelProps {
 
 function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
   return (
-    <div className="relative bg-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-[#35D07F]">
+    <div className="relative bg-gradient-to-b from-gray-50 to-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-gray-300">
       <motion.div
         animate={{
-          y: isSpinning ? [0, -300, -600, -900, -1200] : 0,
+          y: isSpinning ? [0, -200, -400, -600, -800, -1000] : 0,
         }}
         transition={{
-          duration: isSpinning ? 0.8 : 0.3,
+          duration: isSpinning ? 1.2 : 0.4,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
           ease: isSpinning ? "linear" : "easeOut",
@@ -183,15 +183,14 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
         <motion.div
           className="mb-2 relative w-16 h-16 flex items-center justify-center"
           style={{
-            filter: isSpinning ? 'blur(4px)' : 'blur(0px)',
-            opacity: isSpinning ? 0.8 : 1,
+            filter: isSpinning ? 'blur(3px)' : 'blur(0px)',
+            opacity: isSpinning ? 0.85 : 1,
           }}
           animate={{
-            scale: isSpinning ? [1, 0.9, 1] : [1, 1.1, 1],
-            rotate: isSpinning ? [0, -5, 5, 0] : 0,
+            scale: isSpinning ? [1, 0.95, 1] : [1, 1.05, 1],
           }}
           transition={{
-            duration: isSpinning ? 0.15 : 0.8,
+            duration: isSpinning ? 0.2 : 0.6,
             repeat: isSpinning ? Infinity : 1,
             ease: "easeInOut",
           }}
