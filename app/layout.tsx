@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Test your luck with our crypto jackpot game on Celo blockchain",
     images: [
       {
-        url: `${baseUrl}/og-image.svg`,
+        url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "Solo Jackpot - Crypto Casino Game",
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Solo Jackpot - Crypto Jackpot on Celo",
     description: "Spin the wheel and win on Celo blockchain!",
-    images: [`${baseUrl}/og-image.svg`],
+    images: [`${baseUrl}/og-image.png`],
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
   other: {
     // Farcaster Mini App Frame metadata
     "fc:miniapp": JSON.stringify({
       version: "1",
-      imageUrl: `${baseUrl}/og-image.svg`,
+      imageUrl: `${baseUrl}/og-image.png`,
       button: {
         title: "Play Now",
         action: {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     // Frame metadata for backwards compatibility
     "fc:frame": JSON.stringify({
       version: "next",
-      imageUrl: `${baseUrl}/og-image.svg`,
+      imageUrl: `${baseUrl}/og-image.png`,
       button: {
         title: "Play Now",
         action: {

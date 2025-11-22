@@ -18,9 +18,9 @@ export function FarcasterShare({ score }: FarcasterShareProps) {
   return (
     <button
       onClick={handleShare}
-      className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] hover:from-[#35D07F] hover:to-[#FBCC5C] rounded-lg font-semibold text-black transition-all shadow-md hover:shadow-lg text-sm"
     >
-      <Share2 className="w-5 h-5" />
+      <Share2 className="w-4 h-4" />
       Share on Farcaster
     </button>
   );

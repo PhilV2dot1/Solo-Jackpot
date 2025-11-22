@@ -43,7 +43,7 @@ export default function LeaderboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#FBCC5C] via-[#35D07F] to-[#FBCC5C] text-gray-900">
+    <main className="min-h-screen bg-[#FCFF52] text-gray-900">
       <div className="container mx-auto px-3 py-4 max-w-md">
         {/* Header compact */}
         <div className="text-center mb-4">
