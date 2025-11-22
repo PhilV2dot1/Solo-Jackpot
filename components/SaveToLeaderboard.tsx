@@ -84,10 +84,10 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
           transition-all duration-200 shadow-md
           ${
             status === "success"
-              ? "bg-green-500 text-white border border-green-400"
+              ? "bg-gray-800 text-white border border-gray-700"
               : status === "error"
               ? "bg-red-500 text-white border border-red-400"
-              : "bg-gradient-to-r from-[#FBCC5C] to-[#35D07F] text-black border border-[#35D07F] hover:scale-105"
+              : "bg-gradient-to-r from-gray-700 to-gray-900 text-black border border-[#35D07F] hover:scale-105"
           }
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
         `}

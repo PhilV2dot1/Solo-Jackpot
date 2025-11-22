@@ -49,7 +49,7 @@ const CRYPTO_SYMBOLS = [
     id: "solana",
     name: "SOL",
     value: 50,
-    color: "#14F195",
+    color: "#9945FF",
     logo: "https://assets.coingecko.com/coins/images/4128/small/solana.png",
     rank: 5
   },
@@ -169,10 +169,13 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
     <div className="relative bg-gradient-to-b from-gray-50 to-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-gray-300">
       <motion.div
         animate={{
-          y: isSpinning ? [0, -150, -300, -450, -600, -750, -900, -1050, -1200, -1350, -1500] : 0,
+          y: isSpinning ? [
+            0, -100, -200, -300, -400, -500, -600, -700, -800, -900, -1000,
+            -1100, -1200, -1300, -1400, -1500, -1600, -1700, -1800, -1900, -2000
+          ] : 0,
         }}
         transition={{
-          duration: isSpinning ? 2 : 0.5,
+          duration: isSpinning ? 3 : 0.6,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
           ease: isSpinning ? "linear" : "easeOut",

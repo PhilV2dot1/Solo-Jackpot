@@ -42,7 +42,7 @@ export function ResultDisplay({ result }: ResultDisplayProps) {
           result.isJackpot
             ? "bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 border-yellow-300"
             : result.score > 0
-            ? "bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 border-green-300"
+            ? "bg-gradient-to-br from-[#FCFF52] via-yellow-400 to-yellow-500 border-[#FCFF52]"
             : "bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 border-gray-500"
         )}
       >
