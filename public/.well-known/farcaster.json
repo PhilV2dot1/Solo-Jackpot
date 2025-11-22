@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "REPLACE_WITH_BASE64_HEADER_FROM_WARPCAST_TOOL",
-    "payload": "REPLACE_WITH_BASE64_PAYLOAD_FROM_WARPCAST_TOOL",
-    "signature": "REPLACE_WITH_BASE64_SIGNATURE_FROM_WARPCAST_TOOL"
+    "header": "eyJmaWQiOjQ5MTM1MCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweGYxOTM1NmFEQmZiMjcwZDc5MmIwZkExMjBlNzQ0RTQ3OTI2QTA2ZDAifQ",
+    "payload": "eyJkb21haW4iOiJzb2xvLWphY2twb3QudmVyY2VsLmFwcCJ9",
+    "signature": "VHYTQ8dErvqIGKC3T58LEHU37be8djQnkh1hN6wS41EHVEOnhomrxCox/FbDt1FpV/FLqIgbnvhhfF71ZakujBs="
   },
   "miniapp": {
     "version": "1",
@@ -12,7 +12,7 @@
     "splashImageUrl": "https://solo-jackpot.vercel.app/splash.svg",
     "splashBackgroundColor": "#35D07F",
     "description": "Spin the wheel and win on Celo blockchain! Test your luck with our crypto jackpot game featuring BTC, ETH, XRP, and more.",
-    "subtitle": "Spin & Win on Celo",
+    "subtitle": "Spin and Win on Celo",
     "primaryCategory": "games",
     "tags": ["casino", "jackpot", "celo", "crypto", "game"],
     "requiredChains": ["eip155:42220", "eip155:44787"],
