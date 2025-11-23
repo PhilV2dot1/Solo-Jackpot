@@ -47,11 +47,11 @@ export default function Home() {
 
     try {
       await spin();
-      // Reduced spin time for faster gameplay (1.5s spin + 1.4s settling = 2.9s total)
+      // Ultra-fast spin time (0.8s spin + 1s settling = 1.8s total)
       spinTimeoutRef.current = setTimeout(() => {
         setIsSpinning(false);
         spinTimeoutRef.current = null;
-      }, 1500);
+      }, 800);
     } catch (error) {
       setIsSpinning(false);
     }
@@ -109,6 +109,8 @@ export default function Home() {
             isSpinning={isSpinning}
             finalValue={lastResult?.score}
             onSpinComplete={handleSpinComplete}
+            onSpin={handleSpin}
+            disabled={isSpinning || state === "spinning"}
           />
 
           <div className="mt-4 flex flex-col items-center gap-3">

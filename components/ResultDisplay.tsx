@@ -39,10 +39,8 @@ export function ResultDisplay({ result }: ResultDisplayProps) {
         }}
         className={cn(
           "relative rounded-2xl p-4 text-center shadow-xl border-2 overflow-hidden",
-          result.isJackpot
-            ? "bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 border-yellow-300"
-            : result.score > 0
-            ? "bg-gradient-to-br from-[#FCFF52] via-yellow-400 to-yellow-500 border-[#FCFF52]"
+          result.score > 0
+            ? "bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 border-[#FCFF52]"
             : "bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 border-gray-500"
         )}
       >
@@ -73,30 +71,28 @@ export function ResultDisplay({ result }: ResultDisplayProps) {
             </motion.div>
           )}
 
-          <div className="text-2xl font-black mb-2 drop-shadow-lg">
-            {result.isJackpot
-              ? "🎰 JACKPOT!"
-              : result.score > 0
-              ? "🎉 WIN!"
+          <div className="text-2xl font-black mb-2 drop-shadow-lg text-white">
+            {result.score > 0
+              ? "WIN!"
               : "Try Again"}
           </div>
 
           <div className="flex items-center justify-center gap-2 my-3">
             {result.score > 0 ? (
-              <Trophy className="w-8 h-8 text-yellow-200" />
+              <Trophy className="w-8 h-8 text-[#FCFF52]" />
             ) : (
               <Zap className="w-8 h-8 text-gray-400" />
             )}
             <span
               className={cn(
                 "text-5xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]",
-                result.score > 0 ? "text-yellow-100" : "text-gray-300"
+                result.score > 0 ? "text-white" : "text-gray-300"
               )}
             >
               {result.score}
             </span>
             {result.score > 0 && (
-              <Star className="w-8 h-8 text-yellow-200 fill-yellow-200" />
+              <Star className="w-8 h-8 text-[#FCFF52] fill-[#FCFF52]" />
             )}
           </div>
 

@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { SlotMachineLever } from "./SlotMachineLever";
 
 interface JackpotMachineProps {
   isSpinning: boolean;
   finalValue?: number;
   onSpinComplete?: () => void;
+  onSpin?: () => void;
+  disabled?: boolean;
 }
 
 // Symboles crypto avec valeurs basées sur Market Cap (Nov 2025)
@@ -79,7 +82,7 @@ const CRYPTO_SYMBOLS = [
   },
 ];
 
-export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: JackpotMachineProps) {
+export function JackpotMachine({ isSpinning, finalValue, onSpinComplete, onSpin, disabled = false }: JackpotMachineProps) {
   const [reel1, setReel1] = useState(0);
   const [reel2, setReel2] = useState(1);
   const [reel3, setReel3] = useState(2);
@@ -154,6 +157,15 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
         {/* Payout Line - Subtle */}
         <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-[#FCFF52] to-transparent opacity-40 pointer-events-none" />
       </div>
+
+      {/* Slot Machine Lever */}
+      {onSpin && (
+        <SlotMachineLever
+          isSpinning={isSpinning}
+          onPull={onSpin}
+          disabled={disabled}
+        />
+      )}
     </div>
   );
 }
@@ -180,13 +192,13 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
 
       <motion.div
         animate={{
-          y: isSpinning ? -1200 : -(targetIndex + CRYPTO_SYMBOLS.length) * 100,
+          y: isSpinning ? -1800 : -(targetIndex + CRYPTO_SYMBOLS.length) * 100,
         }}
         transition={{
-          duration: isSpinning ? 1.5 : 0.8,
+          duration: isSpinning ? 0.8 : 0.5,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
-          ease: isSpinning ? "linear" : [0.25, 0.1, 0.25, 1],
+          ease: isSpinning ? "linear" : [0.34, 1.56, 0.64, 1],
         }}
         className="flex flex-col"
       >
@@ -195,8 +207,8 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
             key={`${sym.id}-${idx}`}
             className="h-[100px] flex flex-col items-center justify-center py-2"
             style={{
-              filter: isSpinning ? 'blur(1px)' : 'blur(0px)',
-              opacity: isSpinning ? 0.9 : 1,
+              filter: isSpinning ? 'blur(0.5px)' : 'blur(0px)',
+              opacity: isSpinning ? 0.95 : 1,
             }}
           >
             {/* Logo Crypto */}

@@ -27,9 +27,11 @@ export function CoinAnimation({ show }: { show: boolean }) {
             delay: i * 0.15,
             ease: "easeOut",
           }}
-          className="absolute text-3xl"
+          className="absolute"
         >
-          💰
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FCFF52] to-yellow-400 border-2 border-gray-800 shadow-lg flex items-center justify-center">
+            <span className="text-2xl font-black text-gray-900">+</span>
+          </div>
         </motion.div>
       ))}
     </div>
