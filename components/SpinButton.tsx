@@ -21,14 +21,13 @@ export function SpinButton({ onClick, disabled, mode }: SpinButtonProps) {
         "relative px-12 py-4 text-2xl font-black rounded-full transition-all duration-200",
         "bg-gradient-to-b from-red-500 via-red-600 to-red-700",
         "hover:from-red-600 hover:via-red-700 hover:to-red-800",
-        "shadow-[0_6px_20px_rgba(239,68,68,0.5)]",
-        "border-4 border-[#FCFF52]",
+        "border-2 border-gray-800",
         "disabled:opacity-50 disabled:cursor-not-allowed",
       )}
       style={{
         boxShadow: disabled
-          ? "0 6px 20px rgba(239,68,68,0.3)"
-          : "0 6px 20px rgba(239,68,68,0.5), inset 0 -2px 4px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2)",
+          ? "0 0 0 6px #FCFF52, 0 6px 20px rgba(239,68,68,0.3)"
+          : "0 0 0 6px #FCFF52, 0 6px 20px rgba(239,68,68,0.5), inset 0 -2px 4px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2)",
       }}
     >
       {/* Shine Effect simplifié */}

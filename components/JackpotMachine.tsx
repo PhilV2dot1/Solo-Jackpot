@@ -124,7 +124,7 @@ export function JackpotMachine({ isSpinning, finalValue, onSpinComplete }: Jackp
   return (
     <div className="relative">
       {/* Machine Frame - Professional Design */}
-      <div className="bg-gradient-to-b from-gray-100 to-gray-200 rounded-2xl p-4 shadow-2xl border-2 border-[#FCFF52]">
+      <div className="bg-gradient-to-b from-gray-100 to-gray-200 rounded-2xl p-4 shadow-2xl border-2 border-gray-700" style={{ boxShadow: '0 0 0 6px #FCFF52, 0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
         {/* Reels Container */}
         <div className="bg-gradient-to-b from-gray-700 to-gray-800 rounded-xl p-4 shadow-inner border border-gray-600">
           <div className="grid grid-cols-3 gap-4">
@@ -180,10 +180,10 @@ function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
 
       <motion.div
         animate={{
-          y: isSpinning ? -800 : -(targetIndex + CRYPTO_SYMBOLS.length) * 100,
+          y: isSpinning ? -1200 : -(targetIndex + CRYPTO_SYMBOLS.length) * 100,
         }}
         transition={{
-          duration: isSpinning ? 2 : 0.8,
+          duration: isSpinning ? 1.5 : 0.8,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
           ease: isSpinning ? "linear" : [0.25, 0.1, 0.25, 1],

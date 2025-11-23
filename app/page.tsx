@@ -77,7 +77,7 @@ export default function Home() {
       <div className="container mx-auto px-3 py-4 max-w-md">
         {/* Header - Professional Design */}
         <div className="text-center mb-4">
-          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-4 border-[#FCFF52]">
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-700" style={{ boxShadow: '0 0 0 6px #FCFF52, 0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
             <h1 className="text-3xl font-black mb-3 bg-gradient-to-r from-gray-900 via-[#FCFF52] to-gray-900 bg-clip-text text-transparent drop-shadow-sm">
               CRYPTO JACKPOT
             </h1>
@@ -104,7 +104,7 @@ export default function Home() {
         )}
 
         {/* Game Area - Professional */}
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-4 border-[#FCFF52]">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-700" style={{ boxShadow: '0 0 0 6px #FCFF52, 0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
           <JackpotMachine
             isSpinning={isSpinning}
             finalValue={lastResult?.score}
