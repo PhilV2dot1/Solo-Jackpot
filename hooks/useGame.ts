@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { GameResult } from "@/components/ResultDisplay";
 import { getFarcasterUser } from "@/lib/farcaster";
+import { useWriteContract, useWaitForTransactionReceipt, useAccount } from "wagmi";
+import { LEADERBOARD_ABI, LEADERBOARD_ADDRESS } from "@/lib/contract-abi";
 
 export type GameState = "idle" | "spinning" | "revealing" | "result";
 export type GameMode = "free" | "onchain";
@@ -42,6 +44,10 @@ export function useGame() {
   const [totalScore, setTotalScore] = useState(0);
   const [sessionId, setSessionId] = useState<bigint | null>(null);
 
+  // Wagmi hooks for contract interaction
+  const { address, isConnected } = useAccount();
+  const { writeContractAsync } = useWriteContract();
+
   const spin = useCallback(async () => {
     setState("spinning");
 
@@ -75,20 +81,53 @@ export function useGame() {
           setTotalScore(prev => prev + result.score);
         }, 3500);
       } else {
-        // On-chain mode: Will be implemented with smart contract
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        const result = getRandomOutcome();
+        // On-chain mode: Use smart contract
+        if (!isConnected || !address) {
+          throw new Error("Wallet not connected");
+        }
 
-        // TODO: Submit to blockchain
-        console.log("On-chain spin result:", result);
+        const farcasterUser = await getFarcasterUser();
+        if (!farcasterUser) {
+          throw new Error("Farcaster user not found");
+        }
 
-        setState("result");
-        setLastResult(result);
+        try {
+          // Step 1: Start party (create session) and get session ID from return value
+          // Note: We'll need to read the sessionId from the contract after transaction
+          const startTx = await writeContractAsync({
+            address: LEADERBOARD_ADDRESS,
+            abi: LEADERBOARD_ABI,
+            functionName: "startParty",
+            args: [BigInt(farcasterUser.fid)],
+          });
 
-        // Delay totalScore update to match visual sequence completion
-        setTimeout(() => {
-          setTotalScore(prev => prev + result.score);
-        }, 3500);
+          console.log("Party started, tx hash:", startTx);
+
+          // For now, we'll simulate the game and save session ID for next implementation
+          // In production, you'd want to read the PartyStarted event to get the sessionId
+
+          // Step 2: Simulate spin
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          const result = getRandomOutcome();
+
+          // Step 3: Submit score if player won
+          // Note: For now we skip submitScore until we can properly read the sessionId from events
+          // This requires using useWaitForTransactionReceipt and reading logs
+          if (result.score > 0) {
+            console.log("Score achieved:", result.score, "- Will implement submitScore with event reading");
+          }
+
+          setState("result");
+          setLastResult(result);
+
+          // Delay totalScore update to match visual sequence completion
+          setTimeout(() => {
+            setTotalScore(prev => prev + result.score);
+          }, 3500);
+        } catch (contractError) {
+          console.error("Contract error:", contractError);
+          throw contractError;
+        }
       }
     } catch (error) {
       console.error("Spin error:", error);
