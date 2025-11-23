@@ -81,20 +81,20 @@ export function SaveToLeaderboard({ score, disabled }: SaveToLeaderboardProps) {
         disabled={disabled || status === "saving" || status === "success"}
         className={`
           inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm
-          transition-all duration-200 shadow-md
+          transition-all duration-200 shadow-lg
           ${
             status === "success"
-              ? "bg-gray-800 text-white border border-gray-700"
+              ? "bg-gradient-to-r from-[#FCFF52] to-yellow-400 text-gray-900 border-2 border-[#FCFF52]"
               : status === "error"
-              ? "bg-red-500 text-white border border-red-400"
-              : "bg-gradient-to-r from-gray-700 to-gray-900 text-black border border-[#35D07F] hover:scale-105"
+              ? "bg-red-500 text-white border-2 border-red-400"
+              : "bg-gradient-to-r from-gray-700 to-gray-900 text-white border-2 border-[#FCFF52] hover:from-gray-800 hover:to-gray-950 hover:scale-105"
           }
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
         `}
       >
         {status === "saving" ? (
           <>
-            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             Saving...
           </>
         ) : status === "success" ? (

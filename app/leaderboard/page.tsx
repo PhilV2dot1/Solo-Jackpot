@@ -47,20 +47,22 @@ export default function LeaderboardPage() {
       <div className="container mx-auto px-3 py-4 max-w-md">
         {/* Header compact */}
         <div className="text-center mb-4">
-          <h1 className="text-2xl font-black bg-gradient-to-r from-gray-800 via-[#FCFF52] to-gray-800 bg-clip-text text-transparent">
-            🏆 LEADERBOARD
-          </h1>
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-4 border-[#FCFF52]">
+            <h1 className="text-2xl font-black bg-gradient-to-r from-gray-900 via-[#FCFF52] to-gray-900 bg-clip-text text-transparent drop-shadow-sm">
+              🏆 LEADERBOARD
+            </h1>
+          </div>
         </div>
 
         {/* Mode Toggle compact */}
         <div className="mb-4 flex justify-center">
-          <div className="bg-white/95 backdrop-blur-lg rounded-full p-1 flex gap-1 border-2 border-gray-300">
+          <div className="bg-white/95 backdrop-blur-lg rounded-full p-1 flex gap-1 border-2 border-[#FCFF52]">
             <button
               onClick={() => setMode("free")}
               className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "free"
-                  ? "bg-gray-800 text-white shadow-lg"
-                  : "text-gray-600 hover:text-gray-900"
+                  ? "bg-gray-800 text-white shadow-lg border border-[#FCFF52]"
+                  : "text-gray-700 hover:text-gray-900 font-bold"
               }`}
             >
               Free Play
@@ -69,8 +71,8 @@ export default function LeaderboardPage() {
               onClick={() => setMode("onchain")}
               className={`px-4 py-1.5 rounded-full font-semibold text-sm transition-all duration-200 ${
                 mode === "onchain"
-                  ? "bg-gray-800 text-white shadow-lg"
-                  : "text-gray-600 hover:text-gray-900"
+                  ? "bg-gray-800 text-white shadow-lg border border-[#FCFF52]"
+                  : "text-gray-700 hover:text-gray-900 font-bold"
               }`}
             >
               On-Chain
@@ -132,7 +134,7 @@ export default function LeaderboardPage() {
         <div className="mt-4 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg text-sm border-2 border-gray-700 hover:border-[#FCFF52]"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg text-sm border-2 border-[#FCFF52] hover:scale-105"
           >
             <Home className="w-4 h-4" />
             Back to Game

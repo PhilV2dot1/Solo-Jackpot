@@ -77,18 +77,18 @@ export default function Home() {
       <div className="container mx-auto px-3 py-4 max-w-md">
         {/* Header - Professional Design */}
         <div className="text-center mb-4">
-          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-300">
-            <h1 className="text-3xl font-black mb-3 bg-gradient-to-r from-gray-800 via-[#FCFF52] to-gray-800 bg-clip-text text-transparent">
+          <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-4 border-[#FCFF52]">
+            <h1 className="text-3xl font-black mb-3 bg-gradient-to-r from-gray-900 via-[#FCFF52] to-gray-900 bg-clip-text text-transparent drop-shadow-sm">
               CRYPTO JACKPOT
             </h1>
 
             {/* Score Display */}
-            <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-gray-100 to-[#FCFF52]/20 rounded-xl p-3 border border-gray-300">
+            <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-3 border-2 border-[#FCFF52] shadow-lg">
               <Trophy className="w-6 h-6 text-[#FCFF52]" />
-              <span className="text-3xl font-black text-gray-800">
+              <span className="text-3xl font-black text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 {totalScore}
               </span>
-              <span className="text-gray-600 text-sm font-bold">PTS</span>
+              <span className="text-[#FCFF52] text-sm font-bold">PTS</span>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function Home() {
         )}
 
         {/* Game Area - Professional */}
-        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-2 border-gray-300">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-xl border-4 border-[#FCFF52]">
           <JackpotMachine
             isSpinning={isSpinning}
             finalValue={lastResult?.score}
@@ -139,7 +139,7 @@ export default function Home() {
         <div className="mt-4 text-center">
           <Link
             href="/leaderboard"
-            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all border-2 border-gray-700 hover:border-[#FCFF52] shadow-lg"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white px-6 py-3 rounded-xl font-bold text-sm transition-all border-2 border-[#FCFF52] hover:border-[#FCFF52] shadow-lg hover:shadow-xl hover:scale-105"
           >
             <Trophy className="w-5 h-5 text-[#FCFF52]" />
             View Leaderboard

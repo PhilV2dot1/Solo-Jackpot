@@ -165,84 +165,89 @@ interface CryptoReelProps {
 }
 
 function CryptoReel({ symbol, isSpinning, delay }: CryptoReelProps) {
+  // Create repeating array of symbols for continuous scroll effect
+  const symbolsToShow = [...CRYPTO_SYMBOLS, ...CRYPTO_SYMBOLS, ...CRYPTO_SYMBOLS];
+  const targetIndex = CRYPTO_SYMBOLS.findIndex(s => s.value === symbol.value);
+
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-white rounded-xl p-3 shadow-lg overflow-hidden border-2 border-gray-300">
+    <div className="relative bg-gradient-to-b from-gray-50 to-white rounded-xl shadow-lg overflow-hidden border-2 border-[#FCFF52] h-32">
+      {/* Visible window shows middle symbol clearly */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        <div className="h-full flex items-center justify-center">
+          <div className="w-full h-24 border-y-2 border-[#FCFF52]/50 bg-[#FCFF52]/5"></div>
+        </div>
+      </div>
+
       <motion.div
         animate={{
-          y: isSpinning ? [
-            0, -100, -200, -300, -400, -500, -600, -700, -800, -900, -1000,
-            -1100, -1200, -1300, -1400, -1500, -1600, -1700, -1800, -1900, -2000
-          ] : 0,
+          y: isSpinning ? -800 : -(targetIndex + CRYPTO_SYMBOLS.length) * 100,
         }}
         transition={{
-          duration: isSpinning ? 3 : 0.6,
+          duration: isSpinning ? 2 : 0.8,
           repeat: isSpinning ? Infinity : 0,
           delay: delay,
-          ease: isSpinning ? "linear" : "easeOut",
+          ease: isSpinning ? "linear" : [0.25, 0.1, 0.25, 1],
         }}
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col"
       >
-        {/* Logo Crypto - Taille réduite pour mobile */}
-        <motion.div
-          className="mb-2 relative w-16 h-16 flex items-center justify-center"
-          style={{
-            filter: isSpinning ? 'blur(3px)' : 'blur(0px)',
-            opacity: isSpinning ? 0.85 : 1,
-          }}
-          animate={{
-            scale: isSpinning ? [1, 0.95, 1] : [1, 1.05, 1],
-          }}
-          transition={{
-            duration: isSpinning ? 0.2 : 0.6,
-            repeat: isSpinning ? Infinity : 1,
-            ease: "easeInOut",
-          }}
-        >
-          {symbol.logo ? (
-            <Image
-              src={symbol.logo}
-              alt={symbol.name}
-              width={64}
-              height={64}
-              className="rounded-full"
-              style={{
-                boxShadow: `0 0 20px ${symbol.color}60`,
-              }}
-              unoptimized
-            />
-          ) : (
+        {symbolsToShow.map((sym, idx) => (
+          <div
+            key={`${sym.id}-${idx}`}
+            className="h-[100px] flex flex-col items-center justify-center py-2"
+            style={{
+              filter: isSpinning ? 'blur(1px)' : 'blur(0px)',
+              opacity: isSpinning ? 0.9 : 1,
+            }}
+          >
+            {/* Logo Crypto */}
+            <div className="mb-1 relative w-14 h-14 flex items-center justify-center">
+              {sym.logo ? (
+                <Image
+                  src={sym.logo}
+                  alt={sym.name}
+                  width={56}
+                  height={56}
+                  className="rounded-full"
+                  style={{
+                    boxShadow: `0 0 15px ${sym.color}60`,
+                  }}
+                  unoptimized
+                />
+              ) : (
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-black text-white"
+                  style={{
+                    backgroundColor: sym.color,
+                    boxShadow: `0 0 15px ${sym.color}60`,
+                  }}
+                >
+                  ✕
+                </div>
+              )}
+            </div>
+
+            {/* Nom de la crypto */}
             <div
-              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black text-white"
+              className="text-xs font-bold px-2 py-0.5 rounded-full"
               style={{
-                backgroundColor: symbol.color,
-                boxShadow: `0 0 20px ${symbol.color}60`,
+                backgroundColor: `${sym.color}20`,
+                color: sym.color,
+                border: `1px solid ${sym.color}`,
               }}
             >
-              ✕
+              {sym.name}
             </div>
-          )}
-        </motion.div>
-
-        {/* Nom de la crypto */}
-        <div
-          className="text-xs font-bold px-2 py-0.5 rounded-full"
-          style={{
-            backgroundColor: `${symbol.color}20`,
-            color: symbol.color,
-            border: `1px solid ${symbol.color}`,
-          }}
-        >
-          {symbol.name}
-        </div>
+          </div>
+        ))}
       </motion.div>
 
-      {/* Shine Effect simplifié - seulement si pas en train de spinner */}
+      {/* Shine Effect - seulement si pas en train de spinner */}
       {!isSpinning && (
         <motion.div
           initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 100, opacity: [0, 0.3, 0] }}
-          transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
-          className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 pointer-events-none"
+          animate={{ x: 100, opacity: [0, 0.4, 0] }}
+          transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
+          className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-r from-transparent via-[#FCFF52] to-transparent opacity-30 pointer-events-none"
         />
       )}
     </div>
