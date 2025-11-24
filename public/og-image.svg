@@ -17,7 +17,7 @@
   <rect width="1200" height="800" fill="url(#ogBg)"/>
 
   <!-- Left side - Slot machine -->
-  <g transform="translate(280, 400)">
+  <g transform="translate(260, 400)">
     <!-- Yellow border -->
     <rect x="-140" y="-140" width="280" height="280" rx="24" fill="none" stroke="#FCFF52" stroke-width="10"/>
 
@@ -55,7 +55,7 @@
   </g>
 
   <!-- Right side - Text -->
-  <g transform="translate(520, 0)">
+  <g transform="translate(480, 0)">
     <!-- Main title -->
     <text x="320" y="315" font-size="90" fill="#1f2937" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle" letter-spacing="-3">Crypto Jackpot</text>
 
