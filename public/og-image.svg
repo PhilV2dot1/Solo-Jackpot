@@ -2,32 +2,72 @@
   <!-- Background gradient -->
   <defs>
     <linearGradient id="ogBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FBCC5C;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#35D07F;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FBCC5C;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#f3f4f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f9fafb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FCFF52;stop-opacity:0.2" />
+    </linearGradient>
+
+    <linearGradient id="ogCardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f9fafb;stop-opacity:0.95" />
     </linearGradient>
   </defs>
 
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#ogBg)"/>
 
-  <!-- Dark overlay -->
-  <rect width="1200" height="630" fill="#000000" opacity="0.3"/>
+  <!-- Left side - Slot machine -->
+  <g transform="translate(280, 315)">
+    <!-- Yellow border -->
+    <rect x="-140" y="-140" width="280" height="280" rx="24" fill="none" stroke="#FCFF52" stroke-width="10"/>
 
-  <!-- Title -->
-  <text x="600" y="200" font-size="120" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">SOLO JACKPOT</text>
+    <!-- Card background -->
+    <rect x="-135" y="-135" width="270" height="270" rx="20" fill="url(#ogCardBg)" stroke="#374151" stroke-width="3"/>
 
-  <!-- Subtitle -->
-  <text x="600" y="290" font-size="48" fill="#FBCC5C" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">Spin & Win on Celo Blockchain</text>
+    <!-- Slot machine -->
+    <g transform="translate(0, -20)">
+      <!-- Machine body -->
+      <rect x="-80" y="-65" width="160" height="110" rx="14" fill="none" stroke="#1f2937" stroke-width="7"/>
 
-  <!-- Crypto Symbols Row -->
-  <text x="250" y="450" font-size="80" fill="#F7931A" font-family="Arial, sans-serif" font-weight="bold">₿</text>
-  <text x="400" y="450" font-size="80" fill="#627EEA" font-family="Arial, sans-serif" font-weight="bold">Ξ</text>
-  <text x="550" y="450" font-size="80" fill="#23292F" font-family="Arial, sans-serif" font-weight="bold">✕</text>
-  <text x="700" y="450" font-size="80" fill="#F3BA2F" font-family="Arial, sans-serif" font-weight="bold">▲</text>
-  <text x="850" y="450" font-size="80" fill="#14F195" font-family="Arial, sans-serif" font-weight="bold">◎</text>
+      <!-- Top -->
+      <rect x="-80" y="-80" width="160" height="15" rx="7" fill="#1f2937"/>
 
-  <!-- Call to action -->
-  <rect x="450" y="500" width="300" height="80" rx="40" fill="#35D07F"/>
-  <text x="600" y="555" font-size="42" fill="#000000" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">PLAY NOW</text>
+      <!-- Reels background -->
+      <rect x="-68" y="-52" width="136" height="50" rx="7" fill="#f9fafb"/>
+
+      <!-- Three 7s -->
+      <text x="-40" y="-14" font-size="32" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+      <text x="0" y="-14" font-size="32" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+      <text x="40" y="-14" font-size="32" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+
+      <!-- Lever -->
+      <g transform="translate(90, 0)">
+        <line x1="0" y1="-35" x2="0" y2="8" stroke="#1f2937" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="0" cy="18" r="11" fill="#FCFF52" stroke="#1f2937" stroke-width="3"/>
+      </g>
+    </g>
+
+    <!-- Sparkles -->
+    <g transform="translate(0, -110)">
+      <line x1="0" y1="-7" x2="0" y2="7" stroke="#FCFF52" stroke-width="4" stroke-linecap="round"/>
+      <line x1="-7" y1="0" x2="7" y2="0" stroke="#FCFF52" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Right side - Text -->
+  <g transform="translate(520, 0)">
+    <!-- Main title -->
+    <text x="320" y="230" font-size="90" fill="#1f2937" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle" letter-spacing="-3">Crypto Jackpot</text>
+
+    <!-- Subtitle -->
+    <text x="320" y="310" font-size="42" fill="#4b5563" font-family="system-ui, -apple-system, sans-serif" font-weight="700" text-anchor="middle">Spin the wheel and have fun</text>
+
+    <!-- Yellow accent line -->
+    <rect x="220" y="340" width="200" height="5" rx="2.5" fill="#FCFF52"/>
+
+    <!-- Features -->
+    <text x="70" y="410" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Play on Celo blockchain</text>
+    <text x="70" y="455" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Just for fun</text>
+    <text x="70" y="500" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Powered by Farcaster</text>
+  </g>
 </svg>

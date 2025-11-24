@@ -1,35 +1,59 @@
-<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background gradient Celo colors -->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FBCC5C;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#35D07F;stop-opacity:1" />
+    <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3f4f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f9fafb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FCFF52;stop-opacity:0.2" />
+    </linearGradient>
+
+    <linearGradient id="iconCardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f9fafb;stop-opacity:0.95" />
     </linearGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#iconBg)"/>
 
-  <!-- Jackpot Machine Frame -->
-  <rect x="212" y="150" width="600" height="724" rx="40" fill="#2C3E50" opacity="0.9"/>
+  <!-- Main slot machine -->
+  <g transform="translate(256, 220)">
+    <!-- Yellow border -->
+    <rect x="-120" y="-120" width="240" height="240" rx="28" fill="none" stroke="#FCFF52" stroke-width="10"/>
 
-  <!-- Screen -->
-  <rect x="262" y="250" width="500" height="350" rx="20" fill="#1A1A1A"/>
+    <!-- Card background -->
+    <rect x="-115" y="-115" width="230" height="230" rx="24" fill="url(#iconCardBg)" stroke="#374151" stroke-width="3"/>
 
-  <!-- Crypto Symbols (simplified) -->
-  <text x="362" y="450" font-size="120" fill="#F7931A" font-family="Arial, sans-serif" font-weight="bold">₿</text>
-  <text x="487" y="450" font-size="120" fill="#627EEA" font-family="Arial, sans-serif" font-weight="bold">Ξ</text>
-  <text x="612" y="450" font-size="120" fill="#FBCC5C" font-family="Arial, sans-serif" font-weight="bold">⬡</text>
+    <!-- Slot machine -->
+    <g transform="translate(0, -15)">
+      <!-- Machine body -->
+      <rect x="-70" y="-55" width="140" height="95" rx="12" fill="none" stroke="#1f2937" stroke-width="6"/>
 
-  <!-- Title -->
-  <text x="512" y="700" font-size="72" fill="#FBCC5C" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">JACKPOT</text>
+      <!-- Top -->
+      <rect x="-70" y="-68" width="140" height="13" rx="6" fill="#1f2937"/>
 
-  <!-- Subtitle -->
-  <text x="512" y="770" font-size="36" fill="#35D07F" font-family="Arial, sans-serif" text-anchor="middle">Powered by Celo</text>
+      <!-- Reels background -->
+      <rect x="-58" y="-45" width="116" height="42" rx="6" fill="#f9fafb"/>
 
-  <!-- Lights -->
-  <circle cx="262" cy="180" r="15" fill="#FF0000" opacity="0.8"/>
-  <circle cx="762" cy="180" r="15" fill="#FBCC5C" opacity="0.8"/>
-  <circle cx="262" cy="844" r="15" fill="#35D07F" opacity="0.8"/>
-  <circle cx="762" cy="844" r="15" fill="#FF0000" opacity="0.8"/>
+      <!-- Three 7s -->
+      <text x="-35" y="-10" font-size="28" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+      <text x="0" y="-10" font-size="28" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+      <text x="35" y="-10" font-size="28" fill="#FCFF52" stroke="#1f2937" stroke-width="2" paint-order="stroke" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle">7</text>
+
+      <!-- Lever -->
+      <g transform="translate(80, 0)">
+        <line x1="0" y1="-28" x2="0" y2="8" stroke="#1f2937" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="0" cy="16" r="10" fill="#FCFF52" stroke="#1f2937" stroke-width="2.5"/>
+      </g>
+    </g>
+
+    <!-- Sparkles -->
+    <g transform="translate(0, -90)">
+      <line x1="0" y1="-6" x2="0" y2="6" stroke="#FCFF52" stroke-width="4" stroke-linecap="round"/>
+      <line x1="-6" y1="0" x2="6" y2="0" stroke="#FCFF52" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Text -->
+  <text x="256" y="410" font-size="38" fill="#1f2937" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle" letter-spacing="-1">Crypto Jackpot</text>
 </svg>
