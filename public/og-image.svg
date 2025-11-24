@@ -1,4 +1,4 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <!-- Background gradient -->
   <defs>
     <linearGradient id="ogBg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -14,10 +14,10 @@
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="630" fill="url(#ogBg)"/>
+  <rect width="1200" height="800" fill="url(#ogBg)"/>
 
   <!-- Left side - Slot machine -->
-  <g transform="translate(280, 315)">
+  <g transform="translate(280, 400)">
     <!-- Yellow border -->
     <rect x="-140" y="-140" width="280" height="280" rx="24" fill="none" stroke="#FCFF52" stroke-width="10"/>
 
@@ -57,17 +57,17 @@
   <!-- Right side - Text -->
   <g transform="translate(520, 0)">
     <!-- Main title -->
-    <text x="320" y="230" font-size="90" fill="#1f2937" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle" letter-spacing="-3">Crypto Jackpot</text>
+    <text x="320" y="315" font-size="90" fill="#1f2937" font-family="system-ui, -apple-system, sans-serif" font-weight="900" text-anchor="middle" letter-spacing="-3">Crypto Jackpot</text>
 
     <!-- Subtitle -->
-    <text x="320" y="310" font-size="42" fill="#4b5563" font-family="system-ui, -apple-system, sans-serif" font-weight="700" text-anchor="middle">Spin the wheel and have fun</text>
+    <text x="320" y="395" font-size="42" fill="#4b5563" font-family="system-ui, -apple-system, sans-serif" font-weight="700" text-anchor="middle">Spin the wheel and have fun</text>
 
     <!-- Yellow accent line -->
-    <rect x="220" y="340" width="200" height="5" rx="2.5" fill="#FCFF52"/>
+    <rect x="220" y="425" width="200" height="5" rx="2.5" fill="#FCFF52"/>
 
     <!-- Features -->
-    <text x="70" y="410" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Play on Celo blockchain</text>
-    <text x="70" y="455" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Just for fun</text>
-    <text x="70" y="500" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Powered by Farcaster</text>
+    <text x="70" y="495" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Play on Celo blockchain</text>
+    <text x="70" y="540" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Just for fun</text>
+    <text x="70" y="585" font-size="26" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-weight="600">✓ Powered by Farcaster</text>
   </g>
 </svg>
